@@ -35,13 +35,13 @@ export const ISOLATION_NAMES: Record<IsolationLevel, IsolationName> = {
 };
 
 export const DEMO_STEPS: DemoStepInfo[] = [
-  { step: 1, title: 'Red Team Vector Generation', phase: 'ATTACK GENERATION', actionText: 'Red Team crafts high-entropy cache probe ATK-0841', highlightZone: 'red_team' },
+  { step: 1, title: 'Bakshak Vector Generation', phase: 'ATTACK GENERATION', actionText: 'Bakshak (Red Team) crafts high-entropy cache probe ATK-0841', highlightZone: 'red_team' },
   { step: 2, title: 'Target Ingestion', phase: 'INSPECTION & INGESTION', actionText: 'Payload reaches Target LLM boundary via zero-trust gateway', highlightZone: 'target_llm' },
   { step: 3, title: 'Telemetry Distortion', phase: 'OBSERVABILITY SPIKE', actionText: 'Latency climbs to 137ms, cache contention signal spikes', highlightZone: 'observability' },
   { step: 4, title: 'Leakage Anomaly Detection', phase: 'INDIRECT LEAKAGE DETECTED', actionText: 'Possible indirect information leakage detected across shared cache', highlightZone: 'leakage' },
   { step: 5, title: 'Risk Score Escalation', phase: 'RISK AMPLIFICATION', actionText: 'Information leakage score escalates: 12% → 18% → 31% → 47%', highlightZone: 'leakage' },
   { step: 6, title: 'Adaptive Isolation Trigger', phase: 'ADAPTIVE ISOLATION', actionText: 'Perimeter automatically strengthens: NORMAL → RESTRICTED → HIGH ISOLATION', highlightZone: 'isolation' },
-  { step: 7, title: 'Blue Team Vulnerability Dispatch', phase: 'DEFENSIVE RESPONSE', actionText: 'Blue Team autonomous agent synthesizes mitigation policy', highlightZone: 'blue_team' },
+  { step: 7, title: 'Rakshak Vulnerability Dispatch', phase: 'DEFENSIVE RESPONSE', actionText: 'Rakshak (Blue Team) autonomous agent synthesizes mitigation policy', highlightZone: 'blue_team' },
   { step: 8, title: 'Defense Deployment', phase: 'ENFORCEMENT', actionText: 'Deploying Cache Isolation & Jitter Injection at kernel boundary', highlightZone: 'defense' },
   { step: 9, title: 'Automated Re-Test Replay', phase: 'RE-TEST IN PROGRESS', actionText: 'Replaying identical adversarial vector to test containment', highlightZone: 'red_team' },
   { step: 10, title: 'Adversarial Probe Blocked', phase: 'VERIFICATION', actionText: 'Attack blocked. Side-channel correlation drops to baseline noise', highlightZone: 'target_llm' },
@@ -59,8 +59,8 @@ interface NetworkPacket {
 
 interface SimulationContextType {
   // Navigation
-  activeTab: 'landing' | 'command_center' | 'attack_lab' | 'security_report';
-  setActiveTab: (tab: 'landing' | 'command_center' | 'attack_lab' | 'security_report') => void;
+  activeTab: 'landing' | 'command_center' | 'attack_lab' | 'security_report' | 'quantum_core';
+  setActiveTab: (tab: 'landing' | 'command_center' | 'attack_lab' | 'security_report' | 'quantum_core') => void;
   architectureModalOpen: boolean;
   setArchitectureModalOpen: (open: boolean) => void;
   finalDemoModalOpen: boolean;
@@ -121,7 +121,7 @@ interface SimulationContextType {
 const SimulationContext = createContext<SimulationContextType | null>(null);
 
 export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeTab, setActiveTab] = useState<'landing' | 'command_center' | 'attack_lab' | 'security_report'>('landing');
+  const [activeTab, setActiveTab] = useState<'landing' | 'command_center' | 'attack_lab' | 'security_report' | 'quantum_core'>('landing');
   const [architectureModalOpen, setArchitectureModalOpen] = useState(false);
   const [finalDemoModalOpen, setFinalDemoModalOpen] = useState(false);
 
@@ -263,12 +263,12 @@ export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
 
     switch (stepIndex) {
-      case 1: // Step 01: RED TEAM Attack generated, red packet begins moving
+      case 1: // Step 01: BAKSHAK (RED TEAM) Attack generated, red packet begins moving
         setThreatLevel('HIGH');
         setAttackStatus('TRANSMITTING');
         setActiveAttack(INITIAL_ATTACKS[0]);
         spawnPacket('ATTACK', 'RED', 'TARGET');
-        appendAuditEvent('Vector Synthesized: ATK-0841', 'RED TEAM', 'Cross-tenant cache probe generated in isolated sandbox.');
+        appendAuditEvent('Vector Synthesized: ATK-0841', 'BAKSHAK (RED TEAM)', 'Cross-tenant cache probe generated in isolated sandbox.');
         break;
 
       case 2: // Step 02: TARGET LLM attack reaches the model
@@ -317,7 +317,7 @@ export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         appendAuditEvent('Adaptive Boundary Escalation', 'ADAPTIVE ISOLATION', 'Perimeter automatically stepped to Level 3: HIGH ISOLATION.');
         break;
 
-      case 7: // Step 07: BLUE TEAM receives vulnerability notification
+      case 7: // Step 07: RAKSHAK (BLUE TEAM) receives vulnerability notification
         setAttackStatus('MITIGATING');
         spawnPacket('NORMAL', 'RISK', 'BLUE');
         break;
@@ -325,7 +325,7 @@ export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       case 8: // Step 08: DEFENSE deployed (Cache Isolation)
         setActiveDefenses((prev) => Array.from(new Set([...prev, 'DEF-01', 'DEF-04'])));
         spawnPacket('DEFENSE', 'BLUE', 'TARGET');
-        appendAuditEvent('Defense Deployed: Cache Isolation', 'BLUE TEAM', 'Enforced GPU tensor cache lines isolation and 50ms constant-time buffering.');
+        appendAuditEvent('Defense Deployed: Cache Isolation', 'RAKSHAK (BLUE TEAM)', 'Enforced GPU tensor cache lines isolation and 50ms constant-time buffering.');
         break;
 
       case 9: // Step 09: RE-TEST replay identical attack
@@ -438,7 +438,7 @@ export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setActiveAttack(attack);
     setAttackStatus('IDLE');
     setThreatLevel(attack.severity);
-    appendAuditEvent(`Vector Loaded: ${attack.id}`, 'RED TEAM', `${attack.name} queued for safety simulation.`);
+    appendAuditEvent(`Vector Loaded: ${attack.id}`, 'BAKSHAK (RED TEAM)', `${attack.name} queued for safety simulation.`);
   }, [appendAuditEvent]);
 
   const launchAttackTest = useCallback(() => {
@@ -502,7 +502,7 @@ export const SimulationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ defenseId }),
     }).catch(() => {});
-    appendAuditEvent(`Policy Deployed: ${defense?.name || defenseId}`, 'BLUE TEAM', 'Enforced zero-trust defense hook.');
+    appendAuditEvent(`Policy Deployed: ${defense?.name || defenseId}`, 'RAKSHAK (BLUE TEAM)', 'Enforced zero-trust defense hook.');
   }, [defenses, appendAuditEvent, spawnPacket]);
 
   const runRetest = useCallback(() => {

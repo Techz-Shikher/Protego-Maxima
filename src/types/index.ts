@@ -45,8 +45,8 @@ export interface CanaryToken {
   id: string;
   label: string;
   code: string;
-  authorizedBoundary: 'BLUE TEAM' | 'TARGET LLM' | 'RED TEAM';
-  currentLocation: 'BLUE TEAM' | 'TARGET LLM' | 'RED TEAM';
+  authorizedBoundary: 'BLUE TEAM' | 'TARGET LLM' | 'RED TEAM' | 'RAKSHAK (BLUE TEAM)' | 'BAKSHAK (RED TEAM)';
+  currentLocation: 'BLUE TEAM' | 'TARGET LLM' | 'RED TEAM' | 'RAKSHAK (BLUE TEAM)' | 'BAKSHAK (RED TEAM)';
   compromised: boolean;
   detectedAt?: string;
 }
@@ -121,3 +121,54 @@ export interface DemoStepInfo {
   actionText: string;
   highlightZone: ActiveHighlightZone;
 }
+
+export interface QuantumMitigationQubit {
+  id: string;
+  qubitIndex: number;
+  name: string;
+  category: 'CACHE' | 'TIMING' | 'SPECULATION' | 'ENCLAVE' | 'CANARY' | 'BUS';
+  costCoefficient: number; // Linear term in QUBO (c_i)
+  latencyMs: number; // Latency penalty
+  entropyGain: number; // Side-channel entropy gain (0-100)
+  active: boolean;
+  stateProbability: number;
+  description: string;
+}
+
+export interface QUBOSolution {
+  optimalState: number[];
+  energy: number;
+  classicalExhaustiveChecked: number;
+  quantumAnnealingIterations: number;
+  tunnelingEvents: number;
+  energyTrajectory: { step: number; energy: number; transverseField: number }[];
+  activeDefenseIds: string[];
+  totalLatencyMs: number;
+  leakageSuppressionPercent: number;
+  solvedAt: string;
+}
+
+export interface QAOAResult {
+  depth: number;
+  gamma: number[];
+  beta: number[];
+  expectationValue: number;
+  approximationRatio: number;
+  stateProbabilities: { state: string; probability: number; label: string }[];
+  sideChannelCorrelation: number; // Pearson rho
+  jitterStdDevMs: number;
+  varianceReductionDb: number;
+}
+
+export interface PQCCertificate {
+  standard: 'NIST FIPS 203 (ML-KEM-1024)' | 'NIST FIPS 204 (ML-DSA-87)';
+  publicKeyHash: string;
+  ciphertextSizeBytes: number;
+  sharedSecretHash: string;
+  signatureScheme: string;
+  securityCategory: 'Level 5 (AES-256 equivalent quantum hardness)';
+  latticeBasisDimension: number;
+  postQuantumSecure: boolean;
+  issuedAt: string;
+}
+

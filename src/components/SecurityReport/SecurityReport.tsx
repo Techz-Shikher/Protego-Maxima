@@ -212,7 +212,7 @@ export const SecurityReport: React.FC = () => {
       standard: 'Artificial Intelligence Risk Management Framework (Map, Measure, Manage, Govern)',
       status: 'COMPLIANT',
       score: '98.4%',
-      description: 'Continuous adversarial red teaming, side-channel telemetry monitoring, and automated policy mitigation satisfy all Measure and Manage tier directives.',
+      description: 'Continuous Bakshak (Red Team) adversarial testing, side-channel telemetry monitoring, and automated Rakshak (Blue Team) policy mitigation satisfy all Measure and Manage tier directives.',
       controlsChecked: 32,
     },
     {

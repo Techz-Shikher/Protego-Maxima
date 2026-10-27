@@ -70,18 +70,18 @@ export const INITIAL_ATTACKS: AttackVector[] = [
 export const INITIAL_CANARIES: CanaryToken[] = [
   {
     id: 'CAN-01',
-    label: 'Red Team Probe Canary',
+    label: 'Bakshak (Red Team) Probe Canary',
     code: 'R-92831',
-    authorizedBoundary: 'RED TEAM',
-    currentLocation: 'RED TEAM',
+    authorizedBoundary: 'BAKSHAK (RED TEAM)',
+    currentLocation: 'BAKSHAK (RED TEAM)',
     compromised: false,
   },
   {
     id: 'CAN-02',
-    label: 'Blue Team Isolation Canary',
+    label: 'Rakshak (Blue Team) Isolation Canary',
     code: 'B-18472',
-    authorizedBoundary: 'BLUE TEAM',
-    currentLocation: 'BLUE TEAM',
+    authorizedBoundary: 'RAKSHAK (BLUE TEAM)',
+    currentLocation: 'RAKSHAK (BLUE TEAM)',
     compromised: false,
   },
   {

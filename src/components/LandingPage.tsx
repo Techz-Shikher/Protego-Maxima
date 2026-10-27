@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSimulation } from '../context/SimulationContext';
-import { Play, ArrowRight, Layers } from 'lucide-react';
+import { Play, ArrowRight, Layers, Atom } from 'lucide-react';
 import { InteractiveHeroTitle } from './InteractiveHeroTitle';
 import { InteractiveParadigmStudio } from './InteractiveParadigmStudio';
 
@@ -21,26 +21,34 @@ export const LandingPage: React.FC = () => {
           </blockquote>
 
           {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               onClick={runLiveDemo}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 border border-cyan-400/40 px-6 py-3.5 text-sm font-bold text-white shadow-lg glow-cyan transition-all cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 border border-cyan-400/40 px-5 py-3 text-sm font-bold text-white shadow-lg glow-cyan transition-all cursor-pointer"
             >
               <Play className="h-4 w-4 fill-white" />
               <span>RUN LIVE DEMO</span>
             </button>
 
             <button
+              onClick={() => setActiveTab('quantum_core')}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-violet-500/50 bg-violet-950/40 hover:bg-violet-900/50 px-5 py-3 text-sm font-bold text-violet-200 shadow-md transition-all cursor-pointer hover:border-violet-400"
+            >
+              <Atom className="h-4 w-4 text-violet-400 animate-spin" style={{ animationDuration: '8s' }} />
+              <span>QUANTUM CORE</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('attack_lab')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-red-500/50 bg-red-950/40 hover:bg-red-900/50 px-6 py-3.5 text-sm font-bold text-red-200 shadow-md transition-all cursor-pointer hover:border-red-400"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-red-500/50 bg-red-950/40 hover:bg-red-900/50 px-5 py-3 text-sm font-bold text-red-200 shadow-md transition-all cursor-pointer hover:border-red-400"
             >
               <ArrowRight className="h-4 w-4 text-red-400" />
-              <span>TEST REAL MODEL (GEMINI 3.8)</span>
+              <span>TEST REAL MODEL</span>
             </button>
 
             <button
               onClick={() => setActiveTab('command_center')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-[#0A1222] hover:border-slate-600 hover:bg-slate-800 px-6 py-3.5 text-sm font-semibold text-slate-200 transition-all cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-[#0A1222] hover:border-slate-600 hover:bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-200 transition-all cursor-pointer"
             >
               <span>COMMAND CENTER</span>
             </button>

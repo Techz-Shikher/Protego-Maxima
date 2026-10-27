@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSimulation } from '../context/SimulationContext';
-import { Play, RotateCcw, Layers, Activity, Sparkles, Terminal } from 'lucide-react';
+import { Play, RotateCcw, Layers, Activity, Sparkles, Terminal, User, ShieldCheck } from 'lucide-react';
 import protegoLogo from '../assets/images/protego_shield_logo_1791520495337.jpg';
+import { OperatorAuthModal, OperatorProfile } from './OperatorAuthModal';
 
 export const TopBar: React.FC = () => {
   const {
@@ -17,6 +18,17 @@ export const TopBar: React.FC = () => {
 
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const [resetRotating, setResetRotating] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [operatorProfile, setOperatorProfile] = useState<OperatorProfile>({
+    name: 'Shikher Singh',
+    callsign: 'SOC-LEAD // ALPHA-01',
+    role: 'SOC_DEFENDER',
+    clearanceLevel: 'TIER 0 (ROOT ENCLAVE)',
+    sessionToken: 'PROT-AUTH-8F92E1C4B0A7',
+    sessionStartedAt: Date.now() - 3600000,
+    isAuthenticated: true,
+    mTLSCertificate: 'ECDSA-P256-SHA384 (VERIFIED)',
+  });
 
   const handleResetClick = () => {
     setResetRotating(true);
@@ -28,7 +40,8 @@ export const TopBar: React.FC = () => {
     { id: 'landing', label: 'Overview', code: '01' },
     { id: 'command_center', label: 'Command Center', code: '02' },
     { id: 'attack_lab', label: 'Model Attack Lab', code: '03' },
-    { id: 'security_report', label: 'Security Report', code: '04' },
+    { id: 'quantum_core', label: 'Quantum Core', code: '04' },
+    { id: 'security_report', label: 'Security Report', code: '05' },
   ];
 
   return (
@@ -172,6 +185,26 @@ export const TopBar: React.FC = () => {
             </div>
           </div>
 
+          {/* Analyst / Operator Login Profile Button */}
+          <button
+            onClick={() => setIsAuthModalOpen(true)}
+            className="flex items-center gap-2 rounded-xl border border-slate-800 bg-[#091122]/90 hover:border-cyan-500/40 px-3 py-1.5 text-xs font-mono transition-all cursor-pointer group"
+            title="View Operator Clearance & Session Credentials"
+          >
+            <div className="relative flex h-6 w-6 items-center justify-center rounded-lg bg-cyan-500/10 border border-cyan-400/30 text-cyan-400">
+              <User className="h-3.5 w-3.5" />
+              <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </div>
+            <div className="text-left hidden sm:block">
+              <div className="text-[11px] font-bold text-white group-hover:text-cyan-300 transition-colors">
+                {operatorProfile.name.split(' ')[0]} (SOC LEAD)
+              </div>
+              <div className="text-[9px] text-emerald-400 font-mono">
+                {operatorProfile.clearanceLevel.split(' ')[0]} ACTIVE
+              </div>
+            </div>
+          </button>
+
           {/* Quick Simulation Reset Tool */}
           <button
             onClick={handleResetClick}
@@ -206,6 +239,14 @@ export const TopBar: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Operator Authentication & Clearance Modal */}
+      <OperatorAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        profile={operatorProfile}
+        onUpdateProfile={setOperatorProfile}
+      />
 
       {/* Mobile Sub-Navigation Deck */}
       <div className="flex md:hidden items-center gap-1 overflow-x-auto px-4 py-2 border-t border-slate-800/60 bg-[#070D1B]">

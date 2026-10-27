@@ -245,9 +245,9 @@ export const ArchitectureModal: React.FC = () => {
                 <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-red-950 border border-red-500/40 text-red-400 mx-auto font-bold text-xs">
                   1
                 </div>
-                <div className="text-xs font-bold text-white">RED INGESTION</div>
+                <div className="text-xs font-bold text-white">BAKSHAK INGESTION</div>
                 <p className="text-[10px] text-slate-300 leading-tight">
-                  Adversarial jailbreak, roleplay probe, or key exfiltration request.
+                  Adversarial jailbreak, roleplay probe, or key exfiltration from Bakshak (Red Team).
                 </p>
                 <div className="text-[9px] text-red-400 font-mono">Payload Transmitted</div>
               </div>

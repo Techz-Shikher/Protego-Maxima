@@ -487,8 +487,8 @@ export const InteractiveParadigmStudio: React.FC = () => {
                     <Zap className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white tracking-wide">RED TEAM</h4>
-                    <span className="text-[10px] font-mono text-red-400">ADVERSARIAL PROBER</span>
+                    <h4 className="text-sm font-bold text-white tracking-wide">BAKSHAK (RED TEAM)</h4>
+                    <span className="text-[10px] font-mono text-red-400">ADVERSARIAL PROBER · भक्षक</span>
                   </div>
                 </div>
                 <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
@@ -536,7 +536,7 @@ export const InteractiveParadigmStudio: React.FC = () => {
             </div>
           </div>
 
-          {/* Blue Team Node */}
+          {/* Rakshak (Blue Team) Node */}
           <div className="rounded-2xl border border-emerald-500/30 bg-[#070e1c] p-6 flex flex-col justify-between hover:border-emerald-500/60 transition-all shadow-lg hover:shadow-[0_0_30px_rgba(16,185,129,0.2)]">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -545,8 +545,8 @@ export const InteractiveParadigmStudio: React.FC = () => {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white tracking-wide">BLUE TEAM</h4>
-                    <span className="text-[10px] font-mono text-emerald-400">DEFENSIVE MITIGATOR</span>
+                    <h4 className="text-sm font-bold text-white tracking-wide">RAKSHAK (BLUE TEAM)</h4>
+                    <span className="text-[10px] font-mono text-emerald-400">DEFENSIVE MITIGATOR · रक्षक</span>
                   </div>
                 </div>
                 <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">

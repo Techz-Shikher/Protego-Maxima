@@ -65,14 +65,14 @@ export const RedTeamPanel: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-base font-black text-white tracking-wide font-sans">
-                AUTONOMOUS RED TEAM
+                BAKSHAK (RED TEAM)
               </h3>
               <span className="rounded-full bg-red-950/80 border border-red-500/40 px-2 py-0.5 text-[10px] font-mono text-red-300 font-bold">
-                ADVERSARIAL
+                OFFENSIVE AI · भक्षक
               </span>
             </div>
             <p className="text-xs font-mono text-slate-400 mt-0.5">
-              ADAPTIVE FUZZING & SIDE-CHANNEL PROBE GENERATOR
+              AUTONOMOUS ADVERSARY FUZZING & SIDE-CHANNEL PROBE GENERATOR
             </p>
           </div>
         </div>

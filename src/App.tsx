@@ -5,6 +5,7 @@ import { LandingPage } from './components/LandingPage';
 import { CommandCenter } from './components/CommandCenter/CommandCenter';
 import { AttackLab } from './components/AttackLab/AttackLab';
 import { SecurityReport } from './components/SecurityReport/SecurityReport';
+import { QuantumCore } from './components/QuantumCore/QuantumCore';
 import { ArchitectureModal } from './components/ArchitectureModal';
 import { FinalDemoModal } from './components/FinalDemoModal';
 import { CyberGlobeBackground } from './components/CyberGlobeBackground';
@@ -25,6 +26,7 @@ const AppContent: React.FC = () => {
         {activeTab === 'landing' && <LandingPage />}
         {activeTab === 'command_center' && <CommandCenter />}
         {activeTab === 'attack_lab' && <AttackLab />}
+        {activeTab === 'quantum_core' && <QuantumCore />}
         {activeTab === 'security_report' && <SecurityReport />}
       </main>
 

@@ -26,10 +26,13 @@ import {
   GitCompare,
   Layers,
   Bot,
-  HelpCircle
+  HelpCircle,
+  Server,
+  Key
 } from 'lucide-react';
 import { ThreatAnalysisCards } from './ThreatAnalysisCards';
 import { ModelComparisonMatrix } from './ModelComparisonMatrix';
+import { OpenSourceModelSpace } from './OpenSourceModelSpace';
 
 export interface ModelOption {
   id: string;
@@ -38,6 +41,7 @@ export interface ModelOption {
   architecture: string;
   description: string;
   color: string;
+  isOpenSource?: boolean;
 }
 
 export const AVAILABLE_MODELS: ModelOption[] = [
@@ -80,6 +84,42 @@ export const AVAILABLE_MODELS: ModelOption[] = [
     architecture: 'High-Throughput Micro Enclave',
     description: 'Resource-constrained worker nodes; highest QPS throughput at lowest compute overhead.',
     color: 'blue',
+  },
+  {
+    id: 'ollama-llama3.3',
+    name: 'Llama 3.3 70B (Ollama / Local)',
+    badge: 'Open Source',
+    architecture: 'Meta Open Weights Local LLM',
+    description: 'Configurable local or containerized Ollama instance on http://localhost:11434',
+    color: 'blue',
+    isOpenSource: true,
+  },
+  {
+    id: 'ollama-deepseek-r1',
+    name: 'DeepSeek R1 (Ollama / Local)',
+    badge: 'Open Weights CoT',
+    architecture: 'Reinforcement-Learned Open Model',
+    description: 'Local reasoning model via Ollama API with step-by-step chain of thought <think> tags.',
+    color: 'purple',
+    isOpenSource: true,
+  },
+  {
+    id: 'ollama-mistral-7b',
+    name: 'Mistral 7B (Ollama)',
+    badge: 'Open Weights',
+    architecture: 'Sliding-Window Attention Open LLM',
+    description: 'Efficient open weights model running on local GPU or Ollama engine.',
+    color: 'amber',
+    isOpenSource: true,
+  },
+  {
+    id: 'ollama-qwen2.5',
+    name: 'Qwen 2.5 14B (Ollama)',
+    badge: 'Open Weights',
+    architecture: 'State-of-the-art open weights architecture.',
+    description: 'High-context open-source model with structured reasoning capabilities.',
+    color: 'emerald',
+    isOpenSource: true,
   },
 ];
 
@@ -156,8 +196,8 @@ interface ModelAttackResult {
 export const AttackLab: React.FC = () => {
   const { adaptIsolation } = useSimulation();
 
-  // Mode: Model Comparison Matrix vs Single Model Probe vs Multi-Model Arena
-  const [labMode, setLabMode] = useState<'matrix' | 'single' | 'multi'>('matrix');
+  // Mode: Model Comparison Matrix vs Open-Source & Ollama vs Single Model vs Multi-Model Arena
+  const [labMode, setLabMode] = useState<'matrix' | 'opensource' | 'single' | 'multi'>('matrix');
   const [selectedModel, setSelectedModel] = useState<string>('gemini-3.8-flash');
   const [compareModels, setCompareModels] = useState<string[]>(['gemini-3.8-flash', 'gemini-3.8-pro']);
 
@@ -381,6 +421,21 @@ export const AttackLab: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setLabMode('opensource')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-2 ${
+              labMode === 'opensource'
+                ? 'bg-gradient-to-r from-emerald-500/25 via-cyan-500/25 to-teal-500/25 text-emerald-200 border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] ring-1 ring-emerald-400/50'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Key className="h-3.5 w-3.5 text-amber-400" />
+            <span>EXTERNAL & OPEN-SOURCE LLM LAB</span>
+            <span className="text-[9px] bg-amber-500/30 text-amber-200 px-1.5 py-0.5 rounded font-extrabold border border-amber-400/40 shadow-sm flex items-center gap-1">
+              🔑 ENTER API KEY
+            </span>
+          </button>
+
+          <button
             onClick={() => {
               setLabMode('single');
               setMultiModelResults(null);
@@ -416,9 +471,11 @@ export const AttackLab: React.FC = () => {
         </div>
       </div>
 
-      {/* Render Model Comparison Matrix or Single/Multi Probe Workspace */}
+      {/* Render Model Comparison Matrix, OpenSource Space, or Single/Multi Probe Workspace */}
       {labMode === 'matrix' ? (
         <ModelComparisonMatrix />
+      ) : labMode === 'opensource' ? (
+        <OpenSourceModelSpace />
       ) : (
         <>
           {/* 3. Target Model Configuration for Single & Multi */}
@@ -430,6 +487,13 @@ export const AttackLab: React.FC = () => {
                   TARGET AI MODEL CONFIGURATION
                 </span>
               </div>
+              <button
+                onClick={() => setLabMode('opensource')}
+                className="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+              >
+                <Key className="h-3 w-3 text-amber-400" />
+                <span>Test Commercial LLM with your API Key ➜</span>
+              </button>
             </div>
 
         {/* If Single Model Mode: Model Selector Cards */}
@@ -571,7 +635,7 @@ export const AttackLab: React.FC = () => {
             <div className="flex items-center gap-2 text-xs font-mono text-white font-bold">
               <Terminal className="h-4 w-4 text-red-400" />
               <span>
-                ADVERSARIAL ATTACK PAYLOAD{' '}
+                BAKSHAK (RED TEAM · भक्षक) ADVERSARIAL PAYLOAD{' '}
                 {labMode === 'single'
                   ? `(SENT TO ${currentModelMeta.name.toUpperCase()})`
                   : `(SENT TO ${compareModels.length} MODELS IN PARALLEL)`}
@@ -679,7 +743,7 @@ export const AttackLab: React.FC = () => {
           <div className="flex items-center justify-between pb-3 border-b border-slate-800">
             <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 font-bold">
               <ShieldCheck className="h-4 w-4 text-cyan-400" />
-              <span>ZERO-TRUST DEFENSE GUARDRAILS</span>
+              <span>RAKSHAK (BLUE TEAM · रक्षक) ZERO-TRUST GUARDRAILS</span>
             </div>
             <span className="text-[10px] font-mono text-slate-500">ACTIVE CONTROLS</span>
           </div>

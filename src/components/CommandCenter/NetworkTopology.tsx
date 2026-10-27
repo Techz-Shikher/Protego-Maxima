@@ -135,7 +135,7 @@ export const NetworkTopology: React.FC = () => {
       },
       red_team: {
         id: 'red_team',
-        label: 'Adversary Injection Node',
+        label: 'Bakshak (Red Team) Adversary',
         subLabel: `Probe: ${activeAttack.id}`,
         category: 'adversary',
         status: isUnderAttack ? 'ELEVATED' : isBlocked ? 'PROTECTED' : 'DEGRADED',
@@ -235,7 +235,7 @@ export const NetworkTopology: React.FC = () => {
       },
       blue_team_mitigator: {
         id: 'blue_team_mitigator',
-        label: 'Blue Team Mitigator',
+        label: 'Rakshak (Blue Team) Mitigator',
         subLabel: 'Autonomous Kernel Synthesizer',
         category: 'defense',
         status: isMitigating ? 'STREAMING' : 'PROTECTED',

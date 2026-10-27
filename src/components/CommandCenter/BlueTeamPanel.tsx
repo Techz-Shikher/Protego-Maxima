@@ -63,10 +63,10 @@ export const BlueTeamPanel: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-base font-black text-white tracking-wide font-sans">
-                BLUE TEAM DEFENSIVE MITIGATION
+                RAKSHAK (BLUE TEAM)
               </h3>
               <span className="rounded-full bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 text-[10px] font-mono text-emerald-300 font-bold">
-                GUARDIAN
+                GUARDIAN SHIELD · रक्षक
               </span>
             </div>
             <p className="text-xs font-mono text-slate-400 mt-0.5">
